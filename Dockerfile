@@ -1,13 +1,11 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0-nanoserver-ltsc2022 AS base
 WORKDIR /app
 EXPOSE 5042
-
 ENV ASPNETCORE_URLS=http://+:5042
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0-nanoserver-ltsc2022 AS build
 ARG configuration=Release
 WORKDIR /src
-USER ContainerAdministrator
 COPY ["TodoApi.csproj", "./"]
 RUN dotnet restore "TodoApi.csproj"
 COPY . .
