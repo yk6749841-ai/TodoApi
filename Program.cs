@@ -63,10 +63,10 @@ app.MapPut("/tasks/{id}", async (int id, ToDoDbContext db, JsonElement body) =>
     if (task is null) return Results.NotFound();
 
     // מקבלים רק את isComplete מהקליינט
-    // if (body.TryGetProperty("isComplete", out var isCompleteProp))
-    // {
-    //     task.IsComplete = isCompleteProp.GetBoolean();
-    // }
+    if (body.TryGetProperty("isComplete", out var isCompleteProp))
+    {
+        task.IsComplete = isCompleteProp.GetBoolean();
+    }
 
     await db.SaveChangesAsync();
     return Results.Ok(task);
